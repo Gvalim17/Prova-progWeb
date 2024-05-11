@@ -3,7 +3,6 @@ package com.senac.projetoarquivo.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,10 +28,17 @@ public class EmpresaController {
     public ResponseEntity<List<Empresa>> getAllEmpresas(){
         List<Empresa> empresas = empresaService.getAllEmpresas();
         if(empresas.isEmpty())
-            return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
         return ResponseEntity.ok(empresas);
     }
-
+    
+    @GetMapping(value = "obterEmpresaPorId/{empresaId}")    
+    public ResponseEntity<Optional<Empresa>> getEmpresaporId(@PathVariable Integer empresaId){
+        Optional<Empresa> empresa = empresaService.obterEmpresaPorId(empresaId);
+        if(empresa.isEmpty())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(empresa);
+    }
 
     @GetMapping(value = "getAllEmpresasSemProjetos")    
     public ResponseEntity<List<EmpresaDtoResponse>> getAllEmpresasSemProjetos(){
@@ -50,21 +56,6 @@ public class EmpresaController {
         return ResponseEntity.ok(empresas);
     }
     
-    @GetMapping(value = "getEmpresaById/{empresaId}")    
-    public ResponseEntity<Optional<Empresa>> getEmpresa(@PathVariable Long empresaId){
-        Optional<Empresa> empresa = empresaService.getEmpresaById(empresaId);
-        if(empresa.isEmpty())
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(empresa);
-    }
-
-    @GetMapping(value = "obterEmpresaPorId/{empresaId}")    
-    public ResponseEntity<Optional<Empresa>> getEmpresaporId(@PathVariable Long empresaId){
-        Optional<Empresa> empresa = empresaService.obterEmpresaPorId(empresaId);
-        if(empresa.isEmpty())
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(empresa);
-    }
     
 	
 }

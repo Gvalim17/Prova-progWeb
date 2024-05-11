@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.senac.projetoarquivo.entity.Empresa;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository <Empresa,Long>{
+public interface EmpresaRepository extends JpaRepository <Empresa,Integer>{
 	@Query(value = "SELECT * FROM empresa WHERE empresa_id = :id", nativeQuery = true)
-	Optional <Empresa> buscarEmpresaPorId(long id);
+	Optional <Empresa> buscarEmpresaPorId(int id);
 }

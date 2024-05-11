@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.senac.projetoarquivo.controllers.dto.response.EmpresaDtoResponse;
@@ -16,7 +17,8 @@ import jakarta.transaction.Transactional;
 @Service
 public class EmpresaService {
 
-    private final EmpresaRepository empresaRepository;
+    @Autowired
+    private EmpresaRepository empresaRepository;
     
     
     public EmpresaService(EmpresaRepository _empresaRepository) {
@@ -63,12 +65,10 @@ public class EmpresaService {
     }
 	
 	@Transactional
-    public Optional<Empresa> getEmpresaById(long id){
-        return empresaRepository.findById(id);
-    }
-	
-	@Transactional
-    public Optional<Empresa> obterEmpresaPorId(long id){
+    public Optional<Empresa> obterEmpresaPorId(int id){
         return empresaRepository.buscarEmpresaPorId(id);
     }
+
+
+
 }
